@@ -8,6 +8,8 @@ return [
          * VendorB\ModuleY\Providers\ModuleServiceProvider::class
          *
          */
+        Vanilo\Foundation\Providers\ModuleServiceProvider::class
+
     ],
     'register_route_models' => true
 ];
