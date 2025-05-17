@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-//extendes vanilo Foundation Product model
 
 use Vanilo\Foundation\Models\Product as BaseProduct;
 

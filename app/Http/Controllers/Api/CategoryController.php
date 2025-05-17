@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Vanilo\Category\Models\Taxonomy;
-use Vanilo\Foundation\Models\Taxon;
+use App\Models\Taxonomy;
+use App\Models\Taxon; 
 
 class CategoryController extends Controller
 {
