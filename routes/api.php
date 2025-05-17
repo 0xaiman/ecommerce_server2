@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('index', [CartController::class, 'indexByAuth']);
         Route::post('add-item', [CartController::class, 'addItemToCart']);
         Route::post('clear', [CartController::class, 'clearCart']);
+    });
+
+    //orders
+    Route::prefix('order')->group(function () {
+        Route::post('checkout', [OrderController::class, 'checkout']);
+        Route::post('cancel', [OrderController::class, 'cancelOrder']);
+        Route::post('list', [OrderController::class, 'listUserOrders']);
     });
 });
 
