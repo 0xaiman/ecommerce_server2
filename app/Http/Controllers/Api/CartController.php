@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CartItemResource;
 use Vanilo\Foundation\Models\Cart;
 use Vanilo\Foundation\Models\CartItem;
-use Vanilo\Foundation\Models\Product;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

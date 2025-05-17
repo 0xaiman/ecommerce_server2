@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Vanilo\Product\Models\Product;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -15,24 +15,37 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    public function show(Product $product)
+    public function show(Request $request)
     {
+        $product = Product::with('images')->findOrFail($request->id);
+
         return response()->json($product);
     }
 
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'name' => 'required',
             'price' => 'required',
             'sku' => 'required',
             'state' => 'required',
+            'image' => 'nullable|image|max:2048', // Optional image
         ]);
+    
+        unset($data['image']);
 
         $product = Product::create($data);
-
-        return response()->json($product);
+    
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+    
+            $product->images()->create([
+                'path' => $path,
+                'is_primary' => true,
+            ]);
+        }
+    
+        return response()->json($product->load('images'));
     }
 
     public function update(Request $request, Product $product)
