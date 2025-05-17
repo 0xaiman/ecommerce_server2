@@ -8,7 +8,8 @@ class ProductRepository
 {
     public function index($request)
     {
-        return Product::all();
+        $paginate=$request->paginate ?? 10;
+        return Product::paginate($paginate);
     }
 
     public function show($request)
