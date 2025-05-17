@@ -8,14 +8,7 @@ class ProductRepository
 {
     public function index($request)
     {
-        //implement default pagination on 10
-        if($request->has('pagination')){
-            $pagination = $request->pagination;
-        }else{
-            $pagination = 10;
-        }
-
-        return Product::paginate($pagination);        
+        return Product::all();
     }
 
     public function show($request)
