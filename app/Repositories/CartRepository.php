@@ -19,7 +19,7 @@ class CartRepository
         $cart = Cart::where('user_id', $user->id)->first();
     
         if (!$cart) {
-            return collect(); // Or throw an exception or return empty paginated result
+            return collect(); 
         }
     
         // Return paginated CartItems
