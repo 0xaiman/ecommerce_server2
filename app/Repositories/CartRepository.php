@@ -40,6 +40,7 @@ class CartRepository
         // 1. Retrieve or create cart for the user
         $cart = Cart::firstOrCreate([
                 'user_id' => $user->id,
+                'created_by' => $user->id,
             ]);
 
             // 2. Find the product
@@ -60,22 +61,22 @@ class CartRepository
     }
 
     public function clearCart()
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    if (!$user) {
-        throw new \Exception('User must be logged in to clear the cart');
+        if (!$user) {
+            throw new \Exception('User must be logged in to clear the cart');
+        }
+
+        $cart = Cart::where('user_id', $user->id)->first();
+
+        if (!$cart) {
+            throw new \Exception('Cart not found');
+        }
+
+        $cart->items()->delete(); // Remove all cart items
+        return true;
     }
-
-    $cart = Cart::where('user_id', $user->id)->first();
-
-    if (!$cart) {
-        throw new \Exception('Cart not found');
-    }
-
-    $cart->items()->delete(); // Remove all cart items
-    return true;
-}
 
     
 }
